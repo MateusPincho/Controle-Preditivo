@@ -18,14 +18,14 @@ Gss_c = ss(A_c,B_c,C_c,D_c);
 
 % 01: Discretize this model using delta t = 0.1
 
-Ts = 0.1;
+Ts = 10;
 Gss_d = c2d(Gss_c, Ts);
 
 % 02: Calculate the output response y(k) using the discrete-time model,
 % where u(k) = 0, but the initial condition xm(0) = [0.5 1.6]T . Interpret
 % your simulation results in terms of the physical mass-spring damped system.
 
-N = 1000; % Number of samples
+N = 500; % Number of samples
 k = 0:N-1; % Time vector
 
 xm0 = [0.5; 1.6]; % Initial position and velocity
@@ -42,3 +42,7 @@ end
 y(N) = Gss_d.C*xm(:,N);          % Final output
 
 plot(k,y)
+xlabel('Time [k]');
+ylabel('Mass position');
+title('Mass-Spring Damped System Response');
+grid on;

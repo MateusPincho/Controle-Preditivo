@@ -1,0 +1,49 @@
+%% Lecture 3: Prediction and Optimization in Predictive Control
+% Exercise 03: find DeltaU
+% -> Second order system 
+% q -> position of the mass
+% u(t) -> external force
+% Choosing the position and the velocity of the mass as state-variables:
+m = 3; % Kg
+k = 1; % N/m
+c = 0.5;
+
+% Matrix of the state-space model
+A_c = [0 1; -k/m -c/m];
+B_c = [0; 1/m];
+C_c = [1 0];
+D_c = 0;
+Gss_c = ss(A_c,B_c,C_c,D_c);
+
+% Find the discrete state-space model
+Ts = 0.1;
+Gss_d = c2d(Gss_c, Ts);
+
+% Compute Phi_Phi, Phi_F, Phi_R
+Nc = 6;
+Np = 20;
+[Phi_Phi, Phi_F, Phi_R, A_e, B_e, C_e] = mpcgain(Gss_d.A,Gss_d.B,Gss_d.C, Nc, Np);
+
+% Simulation Loop
+
+% Initial condition
+x8 = [0.7;1;0.6];
+xm = zeros(3,Np-8);
+xm(:,1) = x8;
+
+
+
+
+% for i = 1:N-1
+%     xm(:,i+1) = Gss_d.A*xm(:,i);  % No input 
+%     y(i) = Gss_d.C*xm(:,i);       % System output 
+% end
+
+
+
+% I_rw = eye(Nc,Nc);
+% rw = 1;
+% x8 = [0.7;1;0.6];
+% DeltaU = inv(Phi_Phi + rw * I_rw) * (Phi_R - Phi_F * x8)
+
+
