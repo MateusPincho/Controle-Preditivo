@@ -1,3 +1,6 @@
+%% Lecture 5: Receding Horizon Control and Closed-loop Systems
+% Tutorial: Design and implement an observer. 
+
 % Define the continuos-time model of the pendulum and discretize
 w = 2;
 Ap = [0 1; -w*w 0]; Bp = [0;1]; Cp = [0 1]; Dp = 0;
